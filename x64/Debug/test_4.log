@@ -1,0 +1,3 @@
+﻿  test_4_1.c
+C:\hello TS\test_4\test_4\test_4_1.c(138): warning C4715: “binary_search”: 不是所有的控件路径都返回值
+  test_4.vcxproj -> C:\hello TS\test_4\x64\Debug\test_4.exe
