@@ -1,23 +1,70 @@
 #define _CRT_SECURE_NO_WARNINGS
+//找凶手
+//A说：不是我。
+//B说：是C。
+//C说：是D。
+//D说：C在胡说。
 //#include<stdio.h>
 //int main()
 //{
-//	int money = 0;
-//	int empty = 0;
-//	scanf("%d", &money);
-//	while (money > 0)
+//	char killer = 0;
+//	for (killer = 'A'; killer <= 'D'; killer++)
 //	{
-//		money--;
-//		empty++;
-//		if (empty%2 == 0)
+//		if ((killer != 'A') + (killer == 'C') + (killer == 'D') + (killer != 'D') == 3)
 //		{
-//			money++;
+//			printf("凶手可能是%c\n", killer);
 //		}
 //	}
-//	printf("%d\n", empty);
 //	return 0;
 //}
-//void print(int arr[], int sz)
+//
+//#include<stdio.h>
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	int c = 0;
+//	int d = 0;
+//	int e = 0;
+//	for (a = 1; a <= 5; a++)
+//	{
+//		for (b = 1; b <= 5; b++)
+//		{
+//			for (c = 1; c <= 5; c++)
+//			{
+//				for (d = 1; d <= 5; d++)
+//				{
+//					for (e = 1; e <= 5; e++)
+//					{
+//						if (((b == 2) + (a == 3) == 1)
+//							&& ((b == 2) + (e == 4) == 1)
+//							&& ((c == 1) + (d == 2) == 1)
+//							&& ((c == 5) + (d == 3) == 1)
+//							&& ((e == 4) + (a == 1) == 1))
+//						{
+//							if (a*b*c*d*e == 120) 
+//							{
+//								printf("a=%d b=%d c=%d d=%d e=%d\n", a, b, c, d, e);
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//	return 0;
+//}
+//#include<stdio.h>
+//void print1(int* p, int sz)
+//{
+//	int i = 0;
+//	int ret = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", *(p + i));
+//	}
+//}
+//void print2(int arr[], int sz)
 //{
 //	int i = 0;
 //	for (i = 0; i < sz; i++)
@@ -25,81 +72,32 @@
 //		printf("%d ", arr[i]);
 //	}
 //}
-//void move(int arr[], int sz)
-//{
-//	int left = 0;
-//	int right = sz - 1;
-//	while (left < right)
-//	{
-//		//找偶数
-//		while ((left < right) && arr[left] % 2 == 1)
-//		{
-//			left++;
-//		}
-//		//找奇数
-//		while ((left < right) && arr[right] % 2 == 0)
-//		{
-//			right--;
-//		}
-//		if (left < right)
-//		{
-//			int tmp = arr[left];
-//			arr[left] = arr[right];
-//			arr[right] = tmp;
-//		}
-//	}
-//}
 //int main()
 //{
-//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int arr[] = {1,2,3,4,5,6,7,8};
 //	int sz = sizeof(arr) / sizeof(arr[0]);
-//	move(arr, sz);
-//	print(arr, sz);
+//	int* p = arr;
+//	print1(p, sz);//指针打印元素
+//	printf("\n");
+//	print1(arr, sz);//下标打印元素
 //	return 0;
 //}
-#include<stdio.h>//杨辉三角
-//     1
-//    1 1
-//   1 2 1
-//  1 3 3 1
-// 1 4 6 4 1
-//1 5 10 10 5 1
 
+#include<stdio.h>
+
+void print(int* arr, int sz)
+{
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+}
 int main()
 {
-	int arr[10][10] = { 0 };
-	int i = 0;
-	int j = 0;
-	for (i = 0; i < 10; i++)
-	{
-		for (j = 0; j <= i; j++)
-		{
-			if (j == 0)
-			{
-				arr[i][j] = 1;
-			}
-			if (i == j)
-			{
-				arr[i][j] = 1;
-			}
-			if (i >= 2 && j >= 1)
-			{
-				arr[i][j] = arr[i - 1][j] + arr[i - 1][j - 1];
-			}
-		}
-	}
-	for (i = 0; i < 10; i++)
-	{
-		int z = 0;
-		for (z = 0; z < 9 - i; z++)
-		{
-			printf(" ");
-		}
-		for (j = 0; j <= i; j++)
-		{
-			printf("%d ", arr[i][j]);
-		}
-		printf("\n");
-	}
+	int arr[] = { 1,2,3,4,5,6,7,8 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	print(arr, sz);
 	return 0;
 }
+
