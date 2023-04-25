@@ -82,22 +82,120 @@
 //	print1(arr, sz);//下标打印元素
 //	return 0;
 //}
+//
+//#include<stdio.h>
+//
+//void print(int* arr, int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	print(arr, sz);
+//	return 0;
+//}
+//函数指针
 
 #include<stdio.h>
+//int Add(int x, int y)
+//{
+//	return x + y;
+//}
+//int main()
+//{
+//	int a = 0;
+//	int b = 0;
+//	scanf("%d%d", &a, &b);
+//	int (*p)(int, int) = Add;
+//	int ret = (*p)(a, b);
+//	printf("%d\n", ret);
+//	return 0;
+//}
+//void print(int arr[], int sz)
+//{
+//	int i = 0;
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//}
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8 };
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	void (*pt)(int, int) = print;
+//	(*pt)(arr, sz);
+//	return 0;
+//}
 
-void print(int* arr, int sz)
+//int main()
+//{
+//	(*(void(*)())0)();
+//	//调用0地址处的函数
+//	//该函数无参数，即返回类型void
+//	//1.void(*)() - 函数指针类型
+//	//2.(void(*)())0 - 对0进行强制类型转换，被解释为一个函数地址
+//	//3.*(void(*)())0 - 对0的地址进行了解引用操作
+//	//4.(*(void(*)())0) - 调用0的地址处的函数
+//	return 0;
+//}
+void add(int x, int y)
 {
-	int i = 0;
-	for (i = 0; i < sz; i++)
-	{
-		printf("%d ", arr[i]);
-	}
+	return x + y;
+}
+void sul(int x, int y)
+{
+	return x - y;
+}
+void mul(int x, int y)
+{
+	return x * y;
+}
+void div(int x, int y)
+{
+	return x / y;
+}
+void mevu()
+{
+	printf("****************************\n");
+	printf("***** 1. add    2. sul *****\n");
+	printf("***** 3. mul    4. div *****\n");
+	printf("*******   0. exit    *******\n");
+	printf("****************************\n");
 }
 int main()
 {
-	int arr[] = { 1,2,3,4,5,6,7,8 };
-	int sz = sizeof(arr) / sizeof(arr[0]);
-	print(arr, sz);
+	int input = 0;
+	int a = 0;
+	int b = 0;
+	int (*poi[5])(int, int) = { NULL, add, sul, mul, div };
+	do
+	{
+		mevu();
+		printf("请输入一个数:>");
+		scanf("%d", &input);
+		if (input >= 1 && input <= 4)
+		{
+			printf("请输入两个数:>");
+			scanf("%d %d", &a, &b);
+			int ret = (*poi[input])(a, b);
+			printf("%d\n", ret);
+		}
+		else if (input == 0)
+		{
+			printf("退出程序\n");
+			break;
+		}
+		else
+		{
+			printf("输入错误, 请重新输入!\n");
+		}
+	} while (input);
 	return 0;
 }
-
