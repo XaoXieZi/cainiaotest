@@ -1,131 +1,169 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
-//int add(int x, int y)
-//{
-//	return x + y;
-//}
-//int sub(int x, int y)
-//{
-//	return x - y;
-//}
-//int mul(int x, int y)
-//{
-//	return x * y;
-//}
-//int div(int x, int y)
-//{
-//	return x / y;
-//}
-//int calc(int(*pt)(int, int))
-//{
-//	int a, b;
-//	printf("请输入两个数字:>");
-//	scanf("%d%d", &a, &b);
-//	return pt(a, b);
-//}
-//void mevu()
-//{
-//	printf("       两位数加减乘除运算\n");
-//	printf("***  1.加  2.减  3.乘  4.除  ***\n");
-//	printf("       输入0.可退出程序\n");
-//}
-//int main()
-//{
-//	int input = 0;
-//	int ret = 0;
-//	do
-//	{
-//		mevu();
-//		printf("请选择:>");
-//		scanf("%d", &input);
-//		switch (input)
-//		{
-//		case 1:
-//			ret = calc(add);
-//			printf("结果 = %d\n", ret);
-//			break;
-//		case 2:
-//			ret = calc(sub);
-//			printf("结果 = %d\n", ret);
-//			break;
-//		case 3:
-//			ret = calc(mul);
-//			printf("结果 = %d\n", ret);
-//			break;
-//		case 4:
-//			ret = calc(div);
-//			printf("结果 = %d\n", ret);
-//			break;
-//		default:
-//			break;
-//		}
-//	} while (input);
-//	return 0;
-//}
-//void bubble_sort(int arr[], int sz)
-//{
-//	int i = 0;
-//	for (i = 0; i < sz - 1; i++)
-//	{
-//		int j = 0;
-//		for (j = 0; j < sz - 1 - i; j++)
-//		{
-//			if (arr[j] > arr[j + 1])
-//			{
-//				int tmp = arr[j];
-//				arr[j] = arr[j + 1];
-//				arr[j + 1] = tmp;
-//			}
-//		}
-//	}
-//}
-//void print(int arr[], int sz)
-//{
-//	int i = 0;
-//	for (i = 0; i < sz; i++)
-//	{
-//		printf("%d ", arr[i]);
-//	}
-//	printf("\n");
-//}
-//int main()
-//{
-//	int arr[] = { 8,7,6,5,4,3,2,1 };
-//	int sz = sizeof(arr) / sizeof(arr[0]);
-//	print(arr, sz);
-//	bubble_sort(arr, sz);
-//	print(arr, sz);
-//	return 0;
-//}
-
-#include<stdio.h>
-int binary_search(int arr[], int sz, int target)
+#include<stdlib.h>
+int cmp_int(const void* e1, const void* e2)
 {
-	int left = 0;
-	int right = sz - 1;
-	int ane = sz;
-	while (left <= right)
+	return *(int*)e1 - *(int*)e2;
+}
+void print(int arr[], int sz)
+{
+	int i = 0;
+	for(i=0; i<sz; i++)
 	{
-		int mid = (left + right) / 2;
-		if (arr[mid] >= target)
-		{
-			ane = mid;
-			right = mid - 1;
-		}
-		else
-		{
-			left = mid + 1;
-		}
+		printf("%d ", arr[i]);
 	}
-	return ane;
 }
 int main()
 {
-	int arr[] = { 1,2,3,4,5,6,7,8,9 };
+	int arr[] = {2,1,3,4,8,9,10,5,6,7};
 	int sz = sizeof(arr) / sizeof(arr[0]);
-	int target;
-	scanf("%d", &target);
-	int ret = binary_search(arr, sz, target);
-	printf("target的下标 = %d\n", ret);
+	qsort(arr, sz, sizeof(arr[0]), cmp_int);
+	print(arr, sz);
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+int cmp_char(const void* e1, const void* e2)
+{
+	return strcmp((char*)e1, (char*)e2);
+}
+void print(char ch[], int ret)
+{
+	int i = 0;
+	for (i = 0; i < ret; i++) {
+		printf("%c ", ch[i]);
+	}
+}
+void test1()
+{
+    char ch[] = "alfkehhasdfuier";
+	int ret = strlen(ch);
+	qsort(ch, ret, sizeof(ch[0]), cmp_char);
+	print(ch, ret);
+}
+
+
+struct stu
+{
+	char name[20];
+	int age;
+};
+int s_int(const void* e1, const void* e2)
+{
+	return ((struct stu*)e1)->age - ((struct stu*)e2)->age;
+}
+void print1(struct stu s[], int sz)
+{
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		printf("%d ", s[i].age);
+	}
+}
+
+int s_char(const void* e1, const void* e2)
+{
+	return strcmp(((struct stu*)e1)->name, ((struct stu*)e2)->name);
+}
+void print2(struct stu s[], int sz)
+{
+	int i = 0;
+	for (i = 0; i < sz; i++)
+	{
+		printf("%s ", s[i].name);
+	}
+}
+void test2() {
+	使用qsort函数排序结构体数据
+	/*struct stu s[3] = { {"zhangsan", 20},{"lisi", 21}, {"wangwu", 19} };
+	int sz = sizeof(s) / sizeof(s[0]);*/
+	按照年龄来排序
+	/*qsort(s, sz, sizeof(s[0]), s_int);
+	print1(s, sz);
+	printf("\n")*/;
+	按照名字来排序
+	qsort(s,sz, sizeof(s[0]), s_char);
+	print2(s, sz);
+	printf("%d\n", s[0].age);
+}
+
+int main()
+{
+	//test1();
+	test2();
+	
+	return 0;
+}
+#include<stdio.h>
+	int test(int a)
+	{
+		if (a > 4 || a < 1)
+		{
+			return -1;
+		}
+		int b, c;
+		if (a <= 4 && a >= 1)
+		{
+			printf("请输入两个数:>");
+			if (a == 1)
+			{
+				scanf("%d%d", &b, &c);
+				return b + c;
+			}
+			else if (a == 2)
+			{
+				scanf("%d%d", &b, &c);
+				return b - c;
+			}
+			else if (a == 3)
+			{
+				scanf("%d%d", &b, &c);
+				return b * c;
+			}
+			else if (a == 4)
+			{
+				scanf("%d%d", &b, &c);
+				return b / c;
+			}
+		}
+	}
+	int main()
+	{
+		int a = 0;
+		printf("1.加，2.减，3.乘，4.除\n");
+		printf("请输入:>");
+		scanf("%d", &a);
+		int ret = test(a);
+		if (ret == -1)
+			printf("输入错误,退出程序！");
+		else
+			printf("等于%d\n", ret);
+		return 0;
+	}
+#include<stdio.h>//回调函数
+	int add(int x, int y)
+	{
+		return x + y;
+	}
+	int cale(int* (pt)(int, int))
+	{
+		int x = 0;
+		int y = 0;
+		scanf("%d%d", &x, &y);
+		return pt(x, y);
+	}
+	int main()
+	{
+		int ret = cale(add);
+		printf("%d\n", ret);
+	}
+int z_sort(void* e1, void* e2){
+	
+}
+int main() {
+	int arr[] = { 2,3,1,4,7,5,6,8 };
+	int sz = sizeof(arr) / sizeof(arr[0]);
+	bublle_sort(arr, sz, sizeof(arr[0]), z_sort);
 	return 0;
 }
